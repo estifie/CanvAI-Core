@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pillow = "^10.3.0"
+numpy = "^1.26.4"
+scikit-learn = "^1.4.2"
+keras = "^3.2.1"
+uvicorn = "^0.29.0"
+fastapi = "^0.110.2"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "run:app"
+load = "run:load"
+train = "run:train"
