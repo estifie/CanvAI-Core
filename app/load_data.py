@@ -1,3 +1,4 @@
+import json
 import numpy as np
 import os
 import pickle
@@ -6,6 +7,7 @@ load_dotenv(override=True)
 
 FEATURES_PATH = os.getenv("FEATURES_PATH", "features.pkl")
 LABELS_PATH = os.getenv("LABELS_PATH", "labels.pkl")
+TYPES_PATH = os.getenv("TYPES_PATH", "app/const/types.json")
 
 files = os.listdir("data")
 x = []
@@ -13,10 +15,12 @@ x_load = []
 y = []
 y_load = []
 
+types = {}
 
 def load_data():
     count = 0
     for file in files:
+        types[count] = file.split(".")[0]
         file = "data/" + file
         x = np.load(file)
         x = x.astype('float32') / 255.
@@ -27,6 +31,10 @@ def load_data():
         y = np.array(y).astype('float32')
         y = y.reshape(y.shape[0], 1)
         y_load.append(y)
+
+    # Write types to a json file
+    with open("app/const/types.json", "w") as f:
+        json.dump(types, f)
 
     return x_load, y_load
 

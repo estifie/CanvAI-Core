@@ -1,7 +1,7 @@
+import json
 import numpy as np
 from PIL import Image
 from app.utils.model import load_model
-from app.const.types import TYPES
 import base64
 import io
 from dotenv import load_dotenv
@@ -10,8 +10,12 @@ import os
 load_dotenv(override=True)
 
 MODEL_PATH = os.getenv("MODEL_PATH", "models/model.keras")
-
 model = load_model(MODEL_PATH)
+
+# Load types.json to TYPES
+TYPES_PATH = os.getenv("TYPES_PATH", "app/const/types.json")
+with open(TYPES_PATH, "r") as f:
+    TYPES = json.load(f)
 
 
 def preprocess_image(image_data):
