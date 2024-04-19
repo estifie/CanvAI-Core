@@ -19,21 +19,17 @@ with open(TYPES_PATH, "r") as f:
 
 
 def preprocess_image(image_data):
-    image = io.BytesIO(base64.b64decode(image_data))
+    decoded_data = base64.b64decode(image_data)
+    
+    image = Image.open(io.BytesIO(decoded_data)).convert("L")
 
-    im = Image.open(image).convert("L")
+    img_array = np.array(image)
 
-    # Resize the image as 28x28
-    im = im.resize((28, 28))
-
-    # The pixels that is closer to 0 will be black and the pixels that is closer to 255 will be white
-    im = im.point(lambda x: 0 if x<50 else 255, '1')
-
-    return np.array(im).reshape(1, 28, 28, 1)
+    return img_array.reshape(1, 28, 28, 1)
 
 def predict_image(image_data):
     img = preprocess_image(image_data)
-    prediction = model.predict(img)
-    print(prediction)
 
-    return TYPES[np.argmax(prediction)]
+    prediction = model.predict(img)
+    
+    return TYPES[str(np.argmax(prediction))], float(np.max(prediction))
