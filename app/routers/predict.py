@@ -14,11 +14,10 @@ router = APIRouter(
 @router.post("/predict")
 async def predict(data: DrawingPredict):
     try:
-
-        prediction = predict_image(data.image_data)
-        print(prediction)
+        prediction, probability = predict_image(data.image_data)
         return {"status": "success", "data": {
-            "prediction": prediction
+            "prediction": prediction,
+            "probability": probability
         }}
     except Exception as e:
         raise HTTPException(status_code=400, detail={"status": "error", "message": str(e)})
