@@ -2,8 +2,8 @@
 
 ## Description
 
-canvAI Core API is an AI image prediction API that is built with FastAPI. The AI is trained with the Google Quickdraw
-dataset and is used to predict doodles.
+The CanvAI Core API is an AI image prediction API that is built with FastAPI. The AI is trained with the Google
+Quickdraw dataset and is used to predict doodles.
 
 ## Dataset
 
