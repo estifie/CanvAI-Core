@@ -5,6 +5,8 @@ from app.schemas.drawing import DrawingPredict
 import os
 load_dotenv(override=True)
 
+prefix = "full_numpy_bitmap_"
+
 router = APIRouter(
     prefix="/model",
     tags=["model"],
@@ -15,6 +17,10 @@ router = APIRouter(
 async def predict(data: DrawingPredict):
     try:
         prediction, probability = predict_image(data.image_data)
+
+        if prediction.startswith(prefix):
+            prediction = prediction[len(prefix):]
+
         return {"status": "success", "data": {
             "prediction": prediction,
             "probability": probability
