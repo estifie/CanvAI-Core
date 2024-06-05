@@ -1,9 +1,1 @@
-{
-	"0": "full_numpy_bitmap_airplane",
-	"1": "full_numpy_bitmap_axe",
-	"2": "full_numpy_bitmap_bed",
-	"3": "full_numpy_bitmap_bicycle",
-	"4": "full_numpy_bitmap_bird",
-	"5": "full_numpy_bitmap_book",
-	"6": "full_numpy_bitmap_bucket"
-}
+{"0": "full_numpy_bitmap_apple", "1": "full_numpy_bitmap_bicycle", "2": "full_numpy_bitmap_broom", "3": "full_numpy_bitmap_campfire", "4": "full_numpy_bitmap_candle", "5": "full_numpy_bitmap_car", "6": "full_numpy_bitmap_chair", "7": "full_numpy_bitmap_cloud", "8": "full_numpy_bitmap_snake", "9": "full_numpy_bitmap_star", "10": "full_numpy_bitmap_tree"}
