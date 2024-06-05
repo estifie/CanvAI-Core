@@ -20,9 +20,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def keras_model(image_x, image_y):
-    num_of_classes = 7
+    num_of_classes = 11
     model = Sequential([
-        Conv2D(32, (5, 5), input_shape=(image_x,image_y,1), activation='relu'),
+        Conv2D(32, (5, 5), input_shape=(image_x, image_y, 1), activation='relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
         Conv2D(64, (5, 5), activation='relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
@@ -34,7 +34,7 @@ def keras_model(image_x, image_y):
         Dense(num_of_classes, activation='softmax')
     ])
 
-    model.compile(loss='categorical_crossentropy', optimizer="adam", metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 def load_from_pickle():
@@ -54,13 +54,14 @@ def train(epochs, batch_size):
     train_x, test_x, train_y, test_y = train_test_split(features, labels, random_state=0, test_size=0.1)
     train_x = train_x.reshape(train_x.shape[0], 28, 28, 1)
     test_x = test_x.reshape(test_x.shape[0], 28, 28, 1)
+
     model = keras_model(28,28)
     model.summary()
     callbacks = [
         TensorBoard(log_dir="model")
     ]
     logger.info("Training started.")
-    model.fit(train_x, train_y, validation_data=(test_x, test_y), epochs=epochs, batch_size=batch_size, callbacks=callbacks)
+    model.fit(train_x, train_y, batch_size=batch_size, validation_data=(test_x, test_y), epochs=epochs, callbacks=callbacks)
     model.save(MODEL_PATH)
     logger.info("Training completed. Model saved.")
 
