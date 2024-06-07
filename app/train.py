@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def keras_model(image_x, image_y):
-    num_of_classes = 11
+    num_of_classes = 10
     model = Sequential([
         Conv2D(32, (5, 5), input_shape=(image_x, image_y, 1), activation='relu'),
         MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'),
